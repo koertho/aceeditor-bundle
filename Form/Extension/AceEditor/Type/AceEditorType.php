@@ -11,10 +11,12 @@
 
 namespace Norzechowicz\AceEditorBundle\Form\Extension\AceEditor\Type;
 
+
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\Options;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
@@ -28,12 +30,11 @@ class AceEditorType extends AbstractType
     private $units = array('%', 'in', 'cm', 'mm', 'em', 'ex', 'pt', 'pc', 'px');
 
     /**
-     * Add the image_path option
-     *
-     * @param \Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
+     * @param OptionsResolver $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
+
         // Remove id from ace editor wrapper attributes. Id must be generated.
         $wrapperAttrNormalizer = function (Options $options, $aceAttr) {
             if (is_array($aceAttr)) {
@@ -41,7 +42,7 @@ class AceEditorType extends AbstractType
                     unset($aceAttr['id']);
                 }
             } else {
-                $aceAttr = array();
+                $aceAttr = [];
             }
 
             return $aceAttr;
@@ -62,9 +63,9 @@ class AceEditorType extends AbstractType
             return array('value' => $value, 'unit' => $unit);
         };
 
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'required' => false,
-            'wrapper_attr' => array(),
+            'wrapper_attr' => [],
             'width' => 200,
             'height' => 200,
             'font_size' => 12,
@@ -77,27 +78,37 @@ class AceEditorType extends AbstractType
             'show_print_margin' => null,
             'show_invisibles' => null,
             'highlight_active_line' => null
-        ));
+        ]);
 
-        $resolver->setAllowedTypes(array(
-            'width' => array('integer', 'string', 'array'),
-            'height' => array('integer', 'string', 'array'),
+
+        $allowedTypes = [
+            'width' => ['integer', 'string', 'array'],
+            'height' => ['integer', 'string', 'array'],
             'mode' => 'string',
             'font_size' => 'integer',
-            'tab_size' => array('integer', 'null'),
-            'read_only' => array('bool', 'null'),
-            'use_soft_tabs' => array('bool', 'null'),
-            'use_wrap_mode' => array('bool', 'null'),
-            'show_print_margin' => array('bool', 'null'),
-            'show_invisibles' => array('bool', 'null'),
-            'highlight_active_line' => array('bool', 'null'),
-        ));
+            'tab_size' => ['integer', 'null'],
+            'read_only' => ['bool', 'null'],
+            'use_soft_tabs' => ['bool', 'null'],
+            'use_wrap_mode' => ['bool', 'null'],
+            'show_print_margin' => ['bool', 'null'],
+            'show_invisibles' => ['bool', 'null'],
+            'highlight_active_line' => ['bool', 'null'],
+        ];
 
-        $resolver->setNormalizers(array(
+        array_walk($allowedTypes, function($types, $option) use ($resolver) {
+            $resolver->setAllowedTypes($option, $types);
+        });
+
+        $normalizers = [
             'wrapper_attr' => $wrapperAttrNormalizer,
             'width'        => $unitNormalizer,
             'height'       => $unitNormalizer,
-        ));
+        ];
+
+        array_walk($normalizers, function($normalizer, $option) use ($resolver) {
+            $resolver->setNormalizer($option, $normalizer);
+        });
+
     }
 
     /**
