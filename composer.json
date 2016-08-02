@@ -13,10 +13,12 @@
     "require": {
         "php": ">=5.3.3",
         "twig/twig": "~1.2",
-        "symfony/framework-bundle" :  "~2.1"
+        "symfony/framework-bundle" :  "^3.1"
     },
     "autoload": {
-        "psr-0": { "Norzechowicz\\AceEditorBundle\\": "" }
+        "psr-4": {
+            "Norzechowicz\\AceEditorBundle\\": ""
+        }
     },
     "target-dir" : "Norzechowicz/AceEditorBundle",
     "extra": {
