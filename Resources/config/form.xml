@@ -9,7 +9,7 @@
     </parameters>
 
     <services>
-        <service id="norzechowicz_ace_editor.form.type.ace_editor" class="%norzechowicz_ace_editor.form.type.aceeditor.class%" scope="request">
+        <service id="norzechowicz_ace_editor.form.type.ace_editor" class="%norzechowicz_ace_editor.form.type.aceeditor.class%">
             <tag name="form.type" alias="ace_editor" />
         </service>
     </services>
