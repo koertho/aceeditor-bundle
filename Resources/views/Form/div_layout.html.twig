@@ -5,6 +5,7 @@
     {{ include_ace_editor() }}
     <script type="text/javascript">
     (function () {
+		ace.require("ace/ext/language_tools");
         var textarea = document.getElementById('{{ id }}'),
             editorElm = document.getElementById('{{ id }}_ace'),
             editor = ace.edit(editorElm),
@@ -25,6 +26,11 @@
         editor.setTheme("{{ theme }}");
         editor.getSession().setMode("{{ mode }}");
         editor.getSession().setValue(textarea.value);
+		editor.setOptions({
+			enableBasicAutocompletion: {{options.enableBasicAutocompletion|default('false')}},
+			enableSnippets: {{options.enableSnippets|default('false')}},
+			enableLiveAutocompletion: {{options.enableLiveAutocompletion|default('false')}}
+		});
 
         {% if read_only is not null %}
         editor.setReadOnly({{ read_only ? 'true' : 'false' }});

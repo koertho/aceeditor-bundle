@@ -83,8 +83,13 @@ class AceEditorExtension extends \Twig_Extension
             $jsPath = $this->environment
                 ->getExtension('asset')
                 ->getAssetUrl($this->basePath . '/' . $this->mode);
+			$path = substr($this->mode,0,strrpos($this->mode, '/'));
+            $extPath = $this->environment
+                ->getExtension('asset')
+                ->getAssetUrl($this->basePath.'/'.$path. '/ext-language_tools.js');
 
             echo sprintf('<script src="%s" charset="utf-8"></script>', $jsPath);
+            echo sprintf('<script src="%s" charset="utf-8"></script>', $extPath);
             $this->ckeditorIncluded = true;
         }
     }
