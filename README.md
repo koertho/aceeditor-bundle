@@ -58,6 +58,11 @@ $builder->add('description', 'ace_editor', array(
     'font_size' => 12,
     'mode' => 'ace/mode/html', // every single default mode must have ace/mode/* prefix
     'theme' => 'ace/theme/monokai', // every single default theme must have ace/theme/* prefix
+    'options' => [
+      'enableBasicAutocompletion' => false,
+		'enableSnippets' => false,
+		'enableLiveAutocompletion' => false
+    ]
     'tab_size' => null,
     'read_only' => null,
     'use_soft_tabs' => null,
