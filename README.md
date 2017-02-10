@@ -8,6 +8,12 @@ Add bundle into your ``composer.json`` file.
 
 ```
 {
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/koertho/aceeditor-bundle"
+        }
+    ],
     "require": {
         "norzechowicz/aceeditor-bundle": "dev-master",
     }
