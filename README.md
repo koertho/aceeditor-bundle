@@ -53,9 +53,9 @@ $builder->add('description', AceEditorType::class, array(
     'mode' => 'ace/mode/html', // every single default mode must have ace/mode/* prefix
     'theme' => 'ace/theme/monokai', // every single default theme must have ace/theme/* prefix
     'options' => [
-      'enableBasicAutocompletion' => false,
-		'enableSnippets' => false,
-		'enableLiveAutocompletion' => false
+      	'enableBasicAutocompletion' => false,
+	'enableSnippets' => false,
+	'enableLiveAutocompletion' => false
     ]
     'tab_size' => null,
     'read_only' => null,
@@ -63,7 +63,8 @@ $builder->add('description', AceEditorType::class, array(
     'use_wrap_mode' => null,
     'show_print_margin' => null,
     'show_invisibles' => null,
-    'highlight_active_line' => null
+    'highlight_active_line' => null,
+    'show_gutter' => null
 ));
 ```
 
