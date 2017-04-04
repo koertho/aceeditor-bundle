@@ -78,7 +78,8 @@ class AceEditorType extends AbstractType
             'use_wrap_mode' => null,
             'show_print_margin' => null,
             'show_invisibles' => null,
-            'highlight_active_line' => null
+            'highlight_active_line' => null,
+			'show_gutter' => null
         ]);
 
 
@@ -94,6 +95,7 @@ class AceEditorType extends AbstractType
             'show_print_margin' => ['bool', 'null'],
             'show_invisibles' => ['bool', 'null'],
             'highlight_active_line' => ['bool', 'null'],
+			'show_gutter' => ['bool','null']
         ];
 
         array_walk($allowedTypes, function($types, $option) use ($resolver) {
@@ -134,6 +136,7 @@ class AceEditorType extends AbstractType
                 'show_print_margin' => $options['show_print_margin'],
                 'show_invisibles' => $options['show_invisibles'],
                 'highlight_active_line' => $options['highlight_active_line'],
+				'show_gutter' => $options['show_gutter']
             )
         );
     }

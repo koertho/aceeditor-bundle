@@ -32,6 +32,7 @@
 			enableLiveAutocompletion: {{options.enableLiveAutocompletion|default('false')}}
 		});
 
+
         {% if read_only is not null %}
         editor.setReadOnly({{ read_only ? 'true' : 'false' }});
         {% endif %}
@@ -52,6 +53,9 @@
         {% endif %}
         {% if use_wrap_mode is not null %}
         editor.getSession().setUseWrapMode({{ use_wrap_mode ? 'true' : 'false' }});
+        {% endif %}
+        {% if show_gutter is not null %}
+        editor.renderer.setShowGutter({{ show_gutter ? 'true' : 'false' }});
         {% endif %}
 
         editor.getSession().on('change', function(){
